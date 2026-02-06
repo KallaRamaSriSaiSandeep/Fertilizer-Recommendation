@@ -228,8 +228,10 @@ const PredictionForm = () => {
         }
     };
 
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
     useEffect(() => {
-        fetch('http://localhost:8000/metadata').then(res => res.json()).then(setMetadata).catch(console.error);
+        fetch(`${API_URL}/metadata`).then(res => res.json()).then(setMetadata).catch(console.error);
     }, []);
 
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -251,7 +253,7 @@ const PredictionForm = () => {
         await new Promise(r => setTimeout(r, 2000)); // Delay for effect
 
         try {
-            const res = await fetch('http://localhost:8000/predict', {
+            const res = await fetch(`${API_URL}/predict`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
