@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  /* Nature/Clay Colors */
+  --color-clay-bg: #e0e5ec;
+  --color-clay-card: #f0f4f8;
+  --color-clay-green-dark: #2a4030;
+  --color-clay-green-light: #4d6b55;
+  --color-clay-accent: #8fb395;
+
+  --color-nature-50: #f4f7f4;
+  --color-nature-900: #253825;
+
+  /* Font */
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Shadows for Claymorphism */
+  --shadow-clay-card: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  --shadow-clay-inset: inset 5px 5px 10px #1a281e, inset -5px -5px 10px #3a5842;
+  --shadow-clay-input: inset 6px 6px 12px #d1d9e6, inset -6px -6px 12px #ffffff;
+  --shadow-clay-button: 8px 8px 16px #2a3d2e, -8px -8px 16px #4e7751;
+  --shadow-clay-button-active: inset 4px 4px 8px #2a3d2e, inset -4px -4px 8px #4e7751;
+
+  /* Animations */
+  --animate-fade-in: fadeIn 0.6s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes sway {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    25% {
+      transform: rotate(2deg);
+    }
+
+    75% {
+      transform: rotate(-1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+}
+
+/* Global Styles */
+@layer base {
+  body {
+    @apply bg-[#9ebf9e] text-[#2a4030] font-sans antialiased;
+    background-image: radial-gradient(circle at 50% 50%, #9ebf9e 0%, #3e5c45 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .clay-card {
+    @apply bg-[#f0f4f8] rounded-[3rem];
+    box-shadow: 20px 20px 60px #2a403040, -20px -20px 60px #ffffff40;
+  }
+
+  .clay-panel-inset {
+    @apply bg-[#2a4030] rounded-[2rem] text-white;
+    box-shadow: inset 8px 8px 16px #1e2e23, inset -8px -8px 16px #36523d;
+  }
+
+  .clay-panel-outset {
+    @apply bg-[#2a4030] rounded-[2rem] text-white;
+    box-shadow: 10px 10px 20px #d1d9e6, -10px -10px 20px #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .clay-input {
+    @apply bg-[#f0f4f8] rounded-2xl border-none outline-none text-[#2a4030] font-bold px-4 py-3 w-full transition-all;
+    box-shadow: inset 6px 6px 12px #d1d9e6, inset -6px -6px 12px #ffffff;
+  }
+
+  .clay-input:focus {
+    box-shadow: inset 8px 8px 16px #c4cbd6, inset -8px -8px 16px #ffffff, 0 0 0 2px #4d6b55;
+  }
+
+  .clay-btn {
+    @apply bg-[#3e5c45] text-white font-bold rounded-2xl transition-all transform active:scale-95;
+    box-shadow: 10px 10px 20px #2a3d2e, -10px -10px 20px #527a5d;
+  }
+
+  .clay-btn:hover {
+    background-color: #46694e;
+  }
+
+  .clay-btn:active {
+    box-shadow: inset 6px 6px 12px #203024, inset -6px -6px 12px #5c8a66;
+  }
+
+  /* Hover Effects */
+  .clay-card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl;
+  }
+
+  .glossy-shine {
+    @apply absolute top-0 left-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-300;
+    background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.4) 25%, transparent 30%);
+    z-index: 20;
+  }
+
+  .group:hover .glossy-shine {
+    opacity: 1;
+    animation: shine 1.5s infinite;
+  }
+}
